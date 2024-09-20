@@ -5,8 +5,9 @@ import (
 )
 
 func HashPassword(password string) (string, error) {
-	// Génération du hash avec un coût par défaut (recommandé)
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	// Génération du hash
+	pass := []byte(password)
+	hashedPassword, err := bcrypt.GenerateFromPassword(pass, bcrypt.DefaultCost) //"bcrypt.DefaultCost : valeur de complexité du hachage (par défaut 10)"
 	if err != nil {
 		return "", err
 	}
