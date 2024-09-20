@@ -15,6 +15,21 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 		username := r.FormValue("username")
 		password := r.FormValue("password")
 
+		if !goodPasswordLetter(password) {
+			http.Error(w, "mdp invalid letter.", http.StatusConflict)
+			fmt.Println("erreur mdp")
+		}
+
+		if !goodPasswordNumber(password) {
+			http.Error(w, "mdp invalid number.", http.StatusConflict)
+			fmt.Println("erreur mdp")
+		}
+
+		if !goodPasswordExtracharact(password) {
+			http.Error(w, "mdp invalid extra.", http.StatusConflict)
+			fmt.Println("erreur mdp")
+		}
+
 		// Vérifier si l'utilisateur existe déjà
 		if _, exists := users[username]; exists {
 			http.Error(w, "Cet utilisateur existe déjà.", http.StatusConflict)
