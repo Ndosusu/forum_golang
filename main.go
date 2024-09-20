@@ -30,4 +30,22 @@ func main() {
 		log.Fatal(errSrv)
 		fmt.Printf("Erreur lors du démarrage du serveur : %v\n", errSrv)
 	}
+
+	//Password
+	password := ""
+
+	hashedPassword, err := HashPassword(password)
+	if err != nil {
+		fmt.Println("Erreur lors du hachage:", err)
+	} else {
+		fmt.Println("Mot de passe haché :", hashedPassword)
+	}
+
+	// Vérification lors de la connexion
+	isPasswordValid := CheckPassword(hashedPassword, password)
+	if isPasswordValid {
+		fmt.Println("Mot de passe valide")
+	} else {
+		fmt.Println("Mot de passe invalide")
+	}
 }
